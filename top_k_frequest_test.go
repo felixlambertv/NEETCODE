@@ -8,22 +8,23 @@ import (
 )
 
 func topKFrequent(nums []int, k int) []int {
+	//Turn to map, put number as key and increment the value
 	m := make(map[int]int)
-
 	for i := 0; i < len(nums); i++ {
 		m[nums[i]] += 1
 	}
 
+	//Create new struct so we can sort map
 	type kv struct {
 		Key int
 		Val int
 	}
-
+	// Mapping all keys
 	var keys []kv
 	for key, value := range m {
 		keys = append(keys, kv{key, value})
 	}
-
+	//sort number count from bigger to smaller
 	sort.Slice(keys, func(i, j int) bool {
 		return keys[i].Val > keys[j].Val
 	})
