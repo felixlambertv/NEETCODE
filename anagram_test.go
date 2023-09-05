@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func isAnagram(s string, t string) bool {
+func isAnagram1(s string, t string) bool {
 	if len(s) != len(t) {
 		return false
 	}
@@ -22,6 +22,27 @@ func isAnagram(s string, t string) bool {
 		}
 	}
 	return true
+}
+
+func isAnagram(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
+
+	r1 := []rune(s)
+	sort.Slice(r1, func(i, j int) bool {
+		return r1[i] < r1[j]
+	})
+
+	t1 := []rune(t)
+	sort.Slice(t1, func(i, j int) bool {
+		return t1[i] < t1[j]
+	})
+
+	if string(r1) == string(t1) {
+		return true
+	}
+	return false
 }
 
 func TestAnagram(t *testing.T) {
